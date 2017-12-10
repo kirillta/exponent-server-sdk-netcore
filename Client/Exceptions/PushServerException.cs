@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using Floxdc.Exponent.Response;
+using Floxdc.ExponentServerSdk.Response;
 
-namespace Floxdc.Exponent.Exceptions
+namespace Floxdc.ExponentServerSdk.Exceptions
 {
     /// <inheritdoc />
     /// <summary>

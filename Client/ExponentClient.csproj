@@ -2,7 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>Floxdc.Exponent</RootNamespace>
+    <RootNamespace>Floxdc.ExponentServerSdk</RootNamespace>
+    <Company />
+    <Authors>Kirill Taran</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Server-side library for working with Expo using .Net Core 2.0.</Description>
+    <PackageProjectUrl>https://bitbucket.org/kirillta/exponent-server-sdk-netcore/</PackageProjectUrl>
+    <RepositoryUrl>https://bitbucket.org/kirillta/exponent-server-sdk-netcore/</RepositoryUrl>
+    <PackageLicenseUrl>https://bitbucket.org/kirillta/exponent-server-sdk-netcore/src/72710b6bf1a8ec3f698cafc65d6b797b5804a8e4/License.md</PackageLicenseUrl>
+    <NeutralLanguage />
+    <PackageTags>expo; exponent; exponent server sdk</PackageTags>
+    <Version>1.0.0-rc1</Version>
+    <PackageId>ExponentServerSdk</PackageId>
+    <Product>ExponentServerSdk</Product>
+    <AssemblyName>ExponentServerSdk</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

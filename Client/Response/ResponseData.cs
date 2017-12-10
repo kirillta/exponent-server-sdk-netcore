@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Floxdc.Exponent.Response
+namespace Floxdc.ExponentServerSdk.Response
 {
     public class ResponseData
     {

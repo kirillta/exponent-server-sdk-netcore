@@ -1,4 +1,4 @@
-﻿namespace Floxdc.Exponent.Exceptions
+﻿namespace Floxdc.ExponentServerSdk.Exceptions
 {
     /// <inheritdoc />
     /// <summary>

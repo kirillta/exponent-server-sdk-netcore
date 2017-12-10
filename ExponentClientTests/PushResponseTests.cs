@@ -1,6 +1,6 @@
-﻿using Floxdc.Exponent;
-using Floxdc.Exponent.Exceptions;
-using Floxdc.Exponent.Infrastructure;
+﻿using Floxdc.ExponentServerSdk;
+using Floxdc.ExponentServerSdk.Exceptions;
+using Floxdc.ExponentServerSdk.Infrastructure;
 using Xunit;
 
 namespace ExponentClientTests

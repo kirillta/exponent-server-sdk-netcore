@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Dynamic;
 
-namespace Floxdc.Exponent
+namespace Floxdc.ExponentServerSdk
 {
     /// <summary>
     /// An object that describes a push notification request.

@@ -1,5 +1,5 @@
 ﻿using System;
-using Floxdc.Exponent;
+using Floxdc.ExponentServerSdk;
 using Microsoft.CSharp.RuntimeBinder;
 using Xunit;
 

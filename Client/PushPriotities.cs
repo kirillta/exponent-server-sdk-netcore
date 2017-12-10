@@ -1,4 +1,4 @@
-﻿namespace Floxdc.Exponent
+﻿namespace Floxdc.ExponentServerSdk
 {
     /// <summary>
     /// The delivery priority of the message. Specify "default" or omit this field 

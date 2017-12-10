@@ -6,11 +6,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Floxdc.Exponent.Exceptions;
-using Floxdc.Exponent.Response;
+using Floxdc.ExponentServerSdk.Exceptions;
+using Floxdc.ExponentServerSdk.Response;
 using Newtonsoft.Json;
 
-namespace Floxdc.Exponent
+namespace Floxdc.ExponentServerSdk
 {
     public class PushClient : IDisposable
     {

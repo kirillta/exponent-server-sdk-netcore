@@ -1,4 +1,4 @@
-﻿namespace Floxdc.Exponent
+﻿namespace Floxdc.ExponentServerSdk
 {
     /// <summary>
     /// A sound to play when the recipient receives this 

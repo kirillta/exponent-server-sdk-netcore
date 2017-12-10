@@ -1,4 +1,4 @@
-﻿namespace Floxdc.Exponent.Response
+﻿namespace Floxdc.ExponentServerSdk.Response
 {
     public class ResponseError
     {

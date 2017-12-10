@@ -1,4 +1,4 @@
-﻿namespace Floxdc.Exponent.Infrastructure
+﻿namespace Floxdc.ExponentServerSdk.Infrastructure
 {
     public enum PushResponseStatuses
     {
