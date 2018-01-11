@@ -13,8 +13,8 @@ Install-Package ExponentServerSdk -Version 1.0.0
 
 ### Usage ###
 
-The push notifications (documentation](https://docs.expo.io/versions/latest/guides/push-notifications.html) is available on the expo site.
-Our issue tracker is located [here](https://bitbucket.org/kirillta/exponent-server-sdk-netcore/issues)
+The push notifications [documentation](https://docs.expo.io/versions/latest/guides/push-notifications.html) is available on the expo site.
+Our issue tracker is located [here](https://bitbucket.org/kirillta/exponent-server-sdk-netcore/issues).
 
 
 ```cs
