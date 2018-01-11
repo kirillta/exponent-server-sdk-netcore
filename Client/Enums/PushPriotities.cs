@@ -1,4 +1,4 @@
-﻿namespace Floxdc.ExponentServerSdk
+﻿namespace Floxdc.ExponentServerSdk.Enums
 {
     /// <summary>
     /// The delivery priority of the message. Specify "default" or omit this field 

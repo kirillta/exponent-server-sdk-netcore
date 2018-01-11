@@ -1,5 +1,6 @@
 ﻿using System;
 using Floxdc.ExponentServerSdk;
+using Floxdc.ExponentServerSdk.Enums;
 using Microsoft.CSharp.RuntimeBinder;
 using Xunit;
 

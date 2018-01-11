@@ -1,7 +1,7 @@
-﻿using Floxdc.ExponentServerSdk.Exceptions;
-using Floxdc.ExponentServerSdk.Infrastructure;
+﻿using Floxdc.ExponentServerSdk.Enums;
+using Floxdc.ExponentServerSdk.Exceptions;
 
-namespace Floxdc.ExponentServerSdk
+namespace Floxdc.ExponentServerSdk.Response
 {
     /// <summary>
     /// Wrapper class for a push notification response. 

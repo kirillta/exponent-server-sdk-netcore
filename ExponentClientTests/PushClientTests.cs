@@ -5,8 +5,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Floxdc.ExponentServerSdk;
+using Floxdc.ExponentServerSdk.Enums;
 using Floxdc.ExponentServerSdk.Exceptions;
-using Floxdc.ExponentServerSdk.Infrastructure;
 using Xunit;
 
 namespace ExponentClientTests

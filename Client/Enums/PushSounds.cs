@@ -1,4 +1,4 @@
-﻿namespace Floxdc.ExponentServerSdk
+﻿namespace Floxdc.ExponentServerSdk.Enums
 {
     /// <summary>
     /// A sound to play when the recipient receives this 
