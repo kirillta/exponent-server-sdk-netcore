@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace Floxdc.ExponentServerSdk
 {
-    public class PushClient : IDisposable
+    public class PushClient : IDisposable, IPushClient
     {
         /// <summary>
         /// Exponent push client.      
