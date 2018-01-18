@@ -1,7 +1,7 @@
-﻿using System;
-using Floxdc.ExponentServerSdk;
+﻿using Floxdc.ExponentServerSdk;
 using Floxdc.ExponentServerSdk.Enums;
 using Microsoft.CSharp.RuntimeBinder;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace ExponentClientTests
@@ -9,23 +9,17 @@ namespace ExponentClientTests
     public class PushMessageTests
     {
         [Fact]
-        public void GetPayload_ShouldThrowArgumentExceptionIfTokenIsInvalid()
-        {
-            var message = new PushMessage("invalid string");
-
-            Assert.Throws<ArgumentException>(() => message.GetPayload());
-        }
-
-
-        [Fact]
         public void GetPayload_ShouldReturnPayload()
         {
             var message = new PushMessage(Token);
 
-            var payload = message.GetPayload();
+            var json = JsonConvert.SerializeObject(message, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var payload = JsonConvert.DeserializeObject<dynamic>(json);
 
-            Assert.Equal(Token, payload.to);
-            Assert.Equal("default", payload.priority);
+
+            Assert.Equal(Token, payload.to.ToString());
+            Assert.Null((PushSounds?) payload.sound);
+            Assert.Equal(PushPriotities.Default, (PushPriotities) payload.priority);
         }
 
 
@@ -36,9 +30,10 @@ namespace ExponentClientTests
         {
             var message = new PushMessage(Token, badge: badge);
 
-            var payload = message.GetPayload();
+            var json = JsonConvert.SerializeObject(message, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var payload = JsonConvert.DeserializeObject<dynamic>(json);
 
-            Assert.Equal(badge, payload.badge);
+            Assert.Equal(badge, (int) payload.badge);
         }
 
 
@@ -48,21 +43,24 @@ namespace ExponentClientTests
             const string body = "body";
             var message = new PushMessage(Token, body: body);
 
-            var payload = message.GetPayload();
+            var json = JsonConvert.SerializeObject(message, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var payload = JsonConvert.DeserializeObject<dynamic>(json);
 
-            Assert.Equal(body, payload.body);
+            Assert.Equal(body, (string) payload.body);
         }
 
 
         [Fact]
         public void GetPayload_ShouldReturnPayloadWithDataWhenDataIsSpecified()
         {
-            var data = new object();
-            var message = new PushMessage(Token, data: data);
+            var data = new { id = 1};
+            var jdata = JsonConvert.SerializeObject(data);
+            var message = new PushMessage(Token, data: jdata);
 
-            var payload = message.GetPayload();
+            var json = JsonConvert.SerializeObject(message, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var payload = JsonConvert.DeserializeObject<dynamic>(json);
 
-            Assert.Equal(data, payload.data);
+            Assert.Equal(jdata, payload.data.ToString());
         }
 
 
@@ -73,9 +71,25 @@ namespace ExponentClientTests
         {
             var message = new PushMessage(Token, expiration: expiration);
 
-            var payload = message.GetPayload();
+            var json = JsonConvert.SerializeObject(message, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var payload = JsonConvert.DeserializeObject<dynamic>(json);
 
-            Assert.Equal(expiration, payload.expiration);
+            Assert.Equal(expiration, (int) payload.expiration);
+        }
+
+
+        [Theory]
+        [InlineData(PushPriotities.Default)]
+        [InlineData(PushPriotities.High)]
+        [InlineData(PushPriotities.Normal)]
+        public void GetPayload_houldReturnPayloadWithSpecifiedPriority(PushPriotities priority)
+        {
+            var message = new PushMessage(Token, priority: priority);
+
+            var json = JsonConvert.SerializeObject(message, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var payload = JsonConvert.DeserializeObject<dynamic>(json);
+
+            Assert.Equal(priority, (PushPriotities)payload.priority);
         }
 
 
@@ -85,9 +99,10 @@ namespace ExponentClientTests
             const string title = "title";
             var message = new PushMessage(Token, title: title);
 
-            var payload = message.GetPayload();
+            var json = JsonConvert.SerializeObject(message, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var payload = JsonConvert.DeserializeObject<dynamic>(json);
 
-            Assert.Equal(title, payload.title);
+            Assert.Equal(title, (string) payload.title);
         }
 
 
@@ -98,9 +113,10 @@ namespace ExponentClientTests
         {
             var message = new PushMessage(Token, ttl: ttl);
 
-            var payload = message.GetPayload();
+            var json = JsonConvert.SerializeObject(message, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var payload = JsonConvert.DeserializeObject<dynamic>(json);
 
-            Assert.Equal(ttl, payload.ttl);
+            Assert.Equal(ttl, (int) payload.ttl);
         }
 
 
@@ -110,21 +126,22 @@ namespace ExponentClientTests
             const PushSounds sound = PushSounds.Default;
             var message = new PushMessage(Token, sound: sound);
 
-            var payload = message.GetPayload();
+            var json = JsonConvert.SerializeObject(message, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var payload = JsonConvert.DeserializeObject<dynamic>(json);
 
-            Assert.Equal(PushSounds.Default.ToString().ToLower(), payload.sound);
+            Assert.Equal(PushSounds.Default.ToString().ToLower(), (string) payload.sound);
         }
 
 
         [Fact]
         public void GetPayload_ShouldReturnPayloadWithoutSoundWhenSoundIsNone()
         {
-            const PushSounds sound = PushSounds.None;
-            var message = new PushMessage(Token, sound: sound);
+            var message = new PushMessage(Token, sound: PushSounds.None);
 
-            var payload = message.GetPayload();
+            var json = JsonConvert.SerializeObject(message, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var payload = JsonConvert.DeserializeObject<dynamic>(json);
 
-            Assert.Throws<RuntimeBinderException>(() => payload.sound);
+            Assert.Throws<RuntimeBinderException>(() => (PushSounds) payload.sound);
         }
 
 

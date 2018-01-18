@@ -65,7 +65,12 @@ namespace Floxdc.ExponentServerSdk
         /// <param name="pushMessage">A single PushMessage object.</param>
         /// <returns>A PushResponse object which contains the results.</returns>
         public async Task<PushResponse> Publish(PushMessage pushMessage)
-            => (await PublishMultiple(new[] {pushMessage})).FirstOrDefault();
+        {
+            if (pushMessage is null)
+                throw new ArgumentNullException(nameof(pushMessage));
+            
+            return (await PublishMultiple(new[] {pushMessage})).FirstOrDefault();
+        }
 
 
         /// <summary>
@@ -73,21 +78,30 @@ namespace Floxdc.ExponentServerSdk
         /// </summary>
         /// <param name="pushMessages">An array of PushMessage objects.</param>
         /// <returns>A read-only collection of PushResponse objects which contains the results.</returns>
-        public async Task<IReadOnlyCollection<PushResponse>> PublishMultiple(IEnumerable<PushMessage> pushMessages) 
-            => await PublishInternal(pushMessages);
+        public async Task<IReadOnlyCollection<PushResponse>> PublishMultiple(IEnumerable<PushMessage> pushMessages)
+        {
+            if (pushMessages is null)
+                throw new ArgumentNullException(nameof(pushMessages));
+
+            return await PublishInternal(pushMessages);
+        }
 
 
-        private HttpRequestMessage BuildRequest(string json)
-            => new HttpRequestMessage
+        private HttpRequestMessage BuildRequest(PushMessage[] messages)
+        {
+            var json = JsonConvert.SerializeObject(messages, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+
+            return new HttpRequestMessage
             {
                 Content = new StringContent(json, Encoding.UTF8, "application/json"),
                 Method = HttpMethod.Post,
                 RequestUri = PushUrl,
                 Version = new Version(2, 0)
             };
+        }
 
 
-        private async Task<HttpResponseMessage> GetResponse(HttpRequestMessage request)
+        private async Task<(HttpResponseMessage, ResponseData)> GetResponse(HttpRequestMessage request)
         {
             HttpResponseMessage response = null;
             try
@@ -96,7 +110,10 @@ namespace Floxdc.ExponentServerSdk
                 if (response.StatusCode != HttpStatusCode.OK)
                     throw new HttpRequestException($"{response.StatusCode}: {response.ReasonPhrase}");
 
-                return response;
+                var content = await response.Content.ReadAsStringAsync();
+                var data = JsonConvert.DeserializeObject<ResponseData>(content);
+
+                return (response, data);
             }
             catch(HttpRequestException)
             {
@@ -111,19 +128,17 @@ namespace Floxdc.ExponentServerSdk
 
         private async Task<IReadOnlyCollection<PushResponse>> PublishInternal(IEnumerable<PushMessage> pushMessages)
         {
-            var messages = pushMessages as PushMessage[] ?? pushMessages.ToArray();
-            var payloads = messages.AsParallel().Select(m => m.GetPayload()).ToArray();
-            var json = JsonConvert.SerializeObject(payloads);
-            var request = BuildRequest(json);
+            var messages = pushMessages.ToArray();
+            if(messages.AsParallel().Any(message => !IsExponentPushToken(message.To)))
+                throw new ArgumentException("Invalid push token.");
 
-            var response = await GetResponse(request);
-            var content = await response.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<ResponseData>(content);
+            var request = BuildRequest(messages);
+            var (response, data) = await GetResponse(request);
 
             if (data.Errors != null && data.Errors.Any())
                 throw new PushServerException("Request failed.", response, data, data.Errors);
 
-            if (data.Data == null)
+            if (data.Data is null)
                 throw new PushServerException("Invalid server response.", response, data);
 
             if (messages.Length != data.Data.Count)

@@ -34,12 +34,35 @@ namespace ExponentClientTests
             Assert.True(isValid);
         }
 
+
         [Fact]
-        public async Task Publish_ShouldThrowAggregateExceptionWhenPushMessageIsEmpty()
+        public async Task Publish_ShouldThrowArgumentNullExceptionWhenPushMessageIsEmpty()
         {
             var pushClient = new PushClient();
 
-            await Assert.ThrowsAsync<AggregateException>(async () => await pushClient.Publish(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(async () => await pushClient.Publish(null));
+        }
+
+
+        [Fact]
+        public async Task PublishMultiple_ShouldThrowArgumentNullExceptionWhenPushMessageIsEmpty()
+        {
+            var pushClient = new PushClient();
+
+            await Assert.ThrowsAsync<ArgumentNullException>(async () => await pushClient.PublishMultiple(null));
+        }
+
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("\r\n")]
+        [InlineData("token")]
+        public async Task Publish_ShouldThrowArgumentExceptionWhenExpoTokenIsInvalid(string token)
+        {
+            var pushClient = new PushClient();
+            var message = new PushMessage(token);
+
+            await Assert.ThrowsAsync<ArgumentException>(async () => await pushClient.Publish(message));
         }
 
 
@@ -83,6 +106,7 @@ namespace ExponentClientTests
             var ex = await Record.ExceptionAsync(async () => await pushClient.Publish(new PushMessage(Token)));
             var pushEx = ex as PushServerException;
 
+            Assert.NotNull(pushEx);
             Assert.Equal("Request failed.", ex.Message);
             Assert.Equal(code, pushEx.Errors.First().Code);
             Assert.Equal(errorMessage, pushEx.Errors.First().Message);

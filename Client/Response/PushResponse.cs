@@ -41,8 +41,7 @@ namespace Floxdc.ExponentServerSdk.Response
             if (IsSuccess())
                 return;
 
-            var error = Details?.Error;
-            switch (error)
+            switch (Details?.Error)
             {
                 case "DeviceNotRegistered":
                     throw new DeviceNotRegisteredException(ToString());
@@ -50,9 +49,9 @@ namespace Floxdc.ExponentServerSdk.Response
                     throw new MessageTooBigException(ToString());
                 case "MessageRateExceeded":
                     throw new MessageRateExceededException(ToString());
+                default:
+                    throw new PushResponseException(ToString());
             }
-            
-            throw new PushResponseException(ToString());
         }
 
 

@@ -12,13 +12,12 @@
     <PackageLicenseUrl>https://bitbucket.org/kirillta/exponent-server-sdk-netcore/src/72710b6bf1a8ec3f698cafc65d6b797b5804a8e4/License.md</PackageLicenseUrl>
     <NeutralLanguage />
     <PackageTags>expo; exponent; exponent server sdk</PackageTags>
-    <Version>1.0.1</Version>
+    <Version>1.0.2-rc1</Version>
     <PackageId>ExponentServerSdk</PackageId>
     <Product>ExponentServerSdk</Product>
     <AssemblyName>ExponentServerSdk</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="System.Net.Http" Version="4.3.3" />
