@@ -11,7 +11,8 @@ namespace Floxdc.ExponentServerSdk
     {
         public PushMessage(string to, object data = null, string title = null, string body = null,
             PushSounds sound = PushSounds.None, int? ttl = null,
-            int? expiration = null, PushPriotities priority = PushPriotities.Default, int? badge = null)
+            int? expiration = null, PushPriotities priority = PushPriotities.Default, int? badge = null,
+            string channelId = null)
         {
             To = to;
             Data = data;
@@ -22,6 +23,7 @@ namespace Floxdc.ExponentServerSdk
             Expiration = expiration;
             Priority = priority;
             Badge = badge;
+            ChannelId = channelId;
         }
 
 
@@ -37,6 +39,15 @@ namespace Floxdc.ExponentServerSdk
         /// </summary>
         [JsonProperty("body")]
         public string Body { get; private set; }
+
+        /// <summary>
+        /// ID of the Notification Channel through which to display this notification
+        /// on Android devices.If an ID is specified but the corresponding channel
+        /// does not exist on the device(i.e.has not yet been created by your app),
+        /// the notification will not be displayed to the user.
+        /// </summary>
+        [JsonProperty("channelId")]
+        public string ChannelId { get; private set; }
 
         /// <summary>
         /// A dict of extra data to pass inside of the push notification. 
