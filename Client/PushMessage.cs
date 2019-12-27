@@ -11,7 +11,7 @@ namespace Floxdc.ExponentServerSdk
     {
         public PushMessage(string to, object data = null, string title = null, string body = null,
             PushSounds sound = PushSounds.None, int? ttl = null,
-            int? expiration = null, PushPriotities priority = PushPriotities.Default, int? badge = null,
+            int? expiration = null, PushPriorities priority = PushPriorities.Default, int? badge = null,
             string channelId = null)
         {
             To = to;
@@ -69,7 +69,7 @@ namespace Floxdc.ExponentServerSdk
         /// and 'high' are the only valid values.
         /// </summary>
         [JsonProperty("priority")]
-        public PushPriotities Priority { get; private set; }
+        public PushPriorities Priority { get; private set; }
 
         /// <summary>
         /// A sound to play when the recipient receives this 

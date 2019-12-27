@@ -1,12 +1,12 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Floxdc.ExponentServerSdk.Enums
 {
-    internal class PushPriotitiesConverter : JsonConverter
+    internal class PushPrioritiesConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
-            => objectType == typeof(PushPriotities);
+            => objectType == typeof(PushPriorities);
 
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -14,30 +14,30 @@ namespace Floxdc.ExponentServerSdk.Enums
             switch (((string) reader.Value).ToLower())
             {
                 case "default":
-                    return PushPriotities.Default;
+                    return PushPriorities.Default;
                 case "high":
-                    return PushPriotities.High;
+                    return PushPriorities.High;
                 case "normal":
-                    return PushPriotities.Normal;
+                    return PushPriorities.Normal;
                 default:
-                    return PushPriotities.None;
+                    return PushPriorities.None;
             }
         }
 
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            switch ((PushPriotities) value)
+            switch ((PushPriorities) value)
             {
-                case PushPriotities.None:
+                case PushPriorities.None:
                     break;
-                case PushPriotities.Default:
+                case PushPriorities.Default:
                     writer.WriteValue("default");
                     break;
-                case PushPriotities.High:
+                case PushPriorities.High:
                     writer.WriteValue("high");
                     break;
-                case PushPriotities.Normal:
+                case PushPriorities.Normal:
                     writer.WriteValue("normal");
                     break;
                 default:

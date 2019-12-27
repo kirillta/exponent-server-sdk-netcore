@@ -19,7 +19,7 @@ namespace ExponentClientTests
 
             Assert.Equal(Token, payload.to.ToString());
             Assert.Null((PushSounds?) payload.sound);
-            Assert.Equal(PushPriotities.Default, (PushPriotities) payload.priority);
+            Assert.Equal(PushPriorities.Default, (PushPriorities) payload.priority);
         }
 
 
@@ -79,17 +79,17 @@ namespace ExponentClientTests
 
 
         [Theory]
-        [InlineData(PushPriotities.Default)]
-        [InlineData(PushPriotities.High)]
-        [InlineData(PushPriotities.Normal)]
-        public void GetPayload_houldReturnPayloadWithSpecifiedPriority(PushPriotities priority)
+        [InlineData(PushPriorities.Default)]
+        [InlineData(PushPriorities.High)]
+        [InlineData(PushPriorities.Normal)]
+        public void GetPayload_houldReturnPayloadWithSpecifiedPriority(PushPriorities priority)
         {
             var message = new PushMessage(Token, priority: priority);
 
             var json = JsonConvert.SerializeObject(message, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             var payload = JsonConvert.DeserializeObject<dynamic>(json);
 
-            Assert.Equal(priority, (PushPriotities)payload.priority);
+            Assert.Equal(priority, (PushPriorities)payload.priority);
         }
 
 
