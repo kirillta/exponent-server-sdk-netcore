@@ -82,7 +82,7 @@ namespace ExponentClientTests
         [InlineData(PushPriorities.Default)]
         [InlineData(PushPriorities.High)]
         [InlineData(PushPriorities.Normal)]
-        public void GetPayload_houldReturnPayloadWithSpecifiedPriority(PushPriorities priority)
+        public void GetPayload_ShouldReturnPayloadWithSpecifiedPriority(PushPriorities priority)
         {
             var message = new PushMessage(Token, priority: priority);
 

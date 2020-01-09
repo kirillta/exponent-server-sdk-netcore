@@ -10,7 +10,7 @@ namespace Floxdc.ExponentServerSdk
     public class PushMessage
     {
         public PushMessage(string to, object data = null, string title = null, string body = null, PushSounds sound = PushSounds.None, int? ttl = null,
-            int? expiration = null, PushPriotities priority = PushPriotities.Default, int? badge = null, string category = null, bool displayInForeground = false,
+            int? expiration = null, PushPriorities priority = PushPriorities.Default, int? badge = null, string category = null, bool displayInForeground = false,
             string channelId = null)
         {
             Badge = badge;
