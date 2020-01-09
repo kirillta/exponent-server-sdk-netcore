@@ -9,21 +9,22 @@ namespace Floxdc.ExponentServerSdk
     [JsonObject(MemberSerialization.OptIn)]
     public class PushMessage
     {
-        public PushMessage(string to, object data = null, string title = null, string body = null,
-            PushSounds sound = PushSounds.None, int? ttl = null,
-            int? expiration = null, PushPriotities priority = PushPriotities.Default, int? badge = null,
+        public PushMessage(string to, object data = null, string title = null, string body = null, PushSounds sound = PushSounds.None, int? ttl = null,
+            int? expiration = null, PushPriotities priority = PushPriotities.Default, int? badge = null, string category = null, bool displayInForeground = false,
             string channelId = null)
         {
-            To = to;
-            Data = data;
-            Title = title;
+            Badge = badge;
             Body = body;
-            Sound = sound;
-            Ttl = ttl;
+            Category = category;
+            ChannelId = channelId;
+            Data = data;
+            DisplayInForeground = displayInForeground;
             Expiration = expiration;
             Priority = priority;
-            Badge = badge;
-            ChannelId = channelId;
+            Sound = sound;
+            Title = title;
+            To = to;
+            Ttl = ttl;
         }
 
 
@@ -41,6 +42,12 @@ namespace Floxdc.ExponentServerSdk
         public string Body { get; private set; }
 
         /// <summary>
+        /// ID of the Notification Category through which to display this notification.
+        /// </summary>
+        [JsonProperty("category")]
+        public string Category { get; private set; }
+
+        /// <summary>
         /// ID of the Notification Channel through which to display this notification
         /// on Android devices.If an ID is specified but the corresponding channel
         /// does not exist on the device(i.e.has not yet been created by your app),
@@ -55,6 +62,12 @@ namespace Floxdc.ExponentServerSdk
         /// </summary>
         [JsonProperty("data")]
         public object Data { get; private set; }
+
+        /// <summary>
+        /// Displays the notification when the app is foregrounded. Defaults to `false`.
+        /// </summary>
+        [JsonProperty("display_in_foreground")]
+        public bool DisplayInForeground { get; private set; }
 
         /// <summary>
         /// UNIX timestamp for when this message expires. It has 
