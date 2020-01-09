@@ -82,7 +82,7 @@ namespace Floxdc.ExponentServerSdk
         /// and 'high' are the only valid values.
         /// </summary>
         [JsonProperty("priority")]
-        public PushPriotities Priority { get; private set; }
+        public PushPriorities Priority { get; private set; }
 
         /// <summary>
         /// A sound to play when the recipient receives this 

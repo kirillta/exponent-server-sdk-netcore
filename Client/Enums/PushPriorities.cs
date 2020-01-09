@@ -18,8 +18,8 @@ namespace Floxdc.ExponentServerSdk.Enums
     /// messages are sent immediately. Normal priority corresponds to APNs priority 
     /// level 5 and high priority to 10. 
     /// </summary>
-    [JsonConverter(typeof(PushPriotitiesConverter))]
-    public enum PushPriotities
+    [JsonConverter(typeof(PushPrioritiesConverter))]
+    public enum PushPriorities
     {
         None = 0,
         Default = 1,
