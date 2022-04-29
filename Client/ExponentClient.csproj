@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
     <RootNamespace>Floxdc.ExponentServerSdk</RootNamespace>
     <Company>Flox DC</Company>
     <Authors>Kirill Taran, Gaston Mansilla, Nick Kirby</Authors>
@@ -12,15 +12,16 @@
     <PackageLicenseUrl></PackageLicenseUrl>
     <NeutralLanguage />
     <PackageTags>expo; exponent; exponent server sdk</PackageTags>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <PackageId>ExponentServerSdk</PackageId>
     <Product>ExponentServerSdk</Product>
     <AssemblyName>ExponentServerSdk</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReleaseNotes>Security updates</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
