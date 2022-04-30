@@ -7,7 +7,7 @@ This is a direct port of [exponent-server-sdk-python](https://github.com/expo/ex
 ### Installation ###
 
 ```
-PM> Install-Package ExponentServerSdk -Version 1.1.1
+PM> Install-Package ExponentServerSdk -Version 1.1.2
 ```
 
 
